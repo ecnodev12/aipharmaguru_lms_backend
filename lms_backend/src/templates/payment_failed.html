@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Failed</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background-color: #F3F4F6;
+            margin: 0;
+            padding: 0;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .logo h1 {
+            color: #4F46E5;
+            font-size: 28px;
+            font-weight: 800;
+            margin: 0;
+            letter-spacing: -0.5px;
+        }
+
+        .card {
+            background-color: #ffffff;
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            border-top: 6px solid #EF4444;
+            /* Red for failure */
+        }
+
+        .icon {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            color: #111827;
+            font-size: 24px;
+            margin-top: 0;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        p {
+            color: #4B5563;
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .warning-box {
+            background-color: #FEF2F2;
+            border: 1px solid #FECACA;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 20px 0;
+            color: #991B1B;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            color: #9CA3AF;
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="logo">
+            <img src="https://aicureacademy-4c3a9.web.app/assets/ai_cure_logo_new.png" alt="aiCure Academy" style="height: 60px; max-width: 100%; object-fit: contain;" />
+        </div>
+        <div class="card">
+            <div class="icon">
+                <span style="font-size: 48px;">⚠️</span>
+            </div>
+            <h2>Payment Failed</h2>
+            <p>Hi {{name}}, unfortunately, we could not process your payment for the amount of
+                <strong>{{amount}}</strong>.</p>
+
+            <div class="warning-box">
+                <strong>Reason:</strong> {{reason}}
+            </div>
+
+            <p>Please check your payment details or try a different payment method.</p>
+
+            <div style="text-align: center; margin-top: 30px;">
+                <a href="https://aicureacademy.com/cart"
+                    style="background-color: #EF4444; color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; display: inline-block;">Try
+                    Again</a>
+            </div>
+        </div>
+        <div class="footer">
+            <p>&copy; 2026 aiCure Academy. All rights reserved.</p>
+        </div>
+    </div>
+</body>
+
+</html>

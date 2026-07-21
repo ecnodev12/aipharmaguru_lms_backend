@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support Desk Notification</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background-color: #F3F4F6;
+            margin: 0;
+            padding: 0;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background-color: #ffffff;
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            border-top: 6px solid #EF4444;
+        }
+
+        .icon {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            color: #111827;
+            font-size: 24px;
+            margin-top: 0;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        p {
+            color: #4B5563;
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .details-box {
+            background-color: #F9FAFB;
+            border: 1px solid #E5E7EB;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 25px 0;
+        }
+
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            border-bottom: 1px dashed #E5E7EB;
+            padding-bottom: 10px;
+        }
+
+        .detail-row:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .detail-label {
+            color: #6B7280;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .detail-value {
+            color: #111827;
+            font-weight: 600;
+            font-size: 14px;
+            text-align: right;
+        }
+
+        .ticket-message {
+            background-color: #FEF2F2;
+            border-left: 4px solid #EF4444;
+            padding: 12px 16px;
+            border-radius: 4px;
+            margin: 15px 0;
+            color: #1F2937;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .btn-container {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: #EF4444;
+            color: #ffffff;
+            padding: 14px 30px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 14px;
+            box-shadow: 0 4px 6px -1px rgba(239, 68, 68, 0.2);
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            color: #9CA3AF;
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="logo">
+            <img src="https://aicureacademy-4c3a9.web.app/assets/ai_cure_logo_new.png" alt="aiCure Academy" style="height: 60px; max-width: 100%; object-fit: contain;" />
+        </div>
+        <div class="card">
+            <div class="icon">
+                <span style="font-size: 48px;">🎫</span>
+            </div>
+            <h2>Support Ticket Alert</h2>
+            <p>Hello {{recipientName}},</p>
+            <p>A support ticket has been created or updated on the Support Desk. Please review the details below:</p>
+
+            <div class="details-box">
+                <div class="detail-row">
+                    <span class="detail-label">Student Name</span>
+                    <span class="detail-value">{{studentName}}</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Student Email</span>
+                    <span class="detail-value">{{studentEmail}}</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Subject</span>
+                    <span class="detail-value">{{subject}}</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Priority</span>
+                    <span class="detail-value">{{priority}}</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Status</span>
+                    <span class="detail-value">{{status}}</span>
+                </div>
+            </div>
+
+            <div class="ticket-message">
+                <strong>Message:</strong><br/>
+                {{message}}
+            </div>
+
+            <div class="btn-container">
+                <a href="{{ticketUrl}}" class="btn" style="color: #ffffff;">Open Support Desk</a>
+            </div>
+        </div>
+        <div class="footer">
+            <p>&copy; 2026 aiCure Academy. All rights reserved.</p>
+        </div>
+    </div>
+</body>
+
+</html>
