@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Inactivity Report</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background-color: #F3F4F6;
+            margin: 0;
+            padding: 0;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background-color: #ffffff;
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            border-top: 6px solid #EF4444;
+        }
+
+        .icon {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            color: #111827;
+            font-size: 24px;
+            margin-top: 0;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        p {
+            color: #4B5563;
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .table-container {
+            background-color: #F9FAFB;
+            border: 1px solid #E5E7EB;
+            border-radius: 8px;
+            overflow: hidden;
+            margin: 25px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            background-color: #F3F4F6;
+            color: #4B5563;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            padding: 12px 16px;
+            text-align: left;
+            border-bottom: 1px solid #E5E7EB;
+        }
+
+        td {
+            padding: 12px 16px;
+            color: #374151;
+            font-size: 14px;
+            border-bottom: 1px solid #E5E7EB;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        .btn-container {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: #EF4444;
+            color: #ffffff;
+            padding: 14px 30px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 14px;
+            box-shadow: 0 4px 6px -1px rgba(239, 68, 68, 0.2);
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            color: #9CA3AF;
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="logo">
+            <img src="https://aipharmaguru.web.app/assets/PharmaAIGuru.png" alt="aiCure Academy" style="height: 60px; max-width: 100%; object-fit: contain;" />
+        </div>
+        <div class="card">
+            <div class="icon">
+                <span style="font-size: 48px;">⚠️</span>
+            </div>
+            <h2>Daily Student Inactivity Alert</h2>
+            <p>Hello Admin,</p>
+            <p>The platform scan has identified **{{count}}** student(s) who have been inactive (not logged in) for 7 or more days. Prompt outreach is recommended to maintain course completion velocity.</p>
+
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Student</th>
+                            <th>Email</th>
+                            <th>Days Inactive</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{studentRows}}
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="btn-container">
+                <a href="https://aipharmaguru-4c3a9.web.app/#/admin/inactive" class="btn" style="color: #ffffff;">Open Retention Dashboard</a>
+            </div>
+        </div>
+        <div class="footer">
+            <p>&copy; 2026 aiCure Academy. All rights reserved.</p>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Course Material Added</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background-color: #F3F4F6;
+            margin: 0;
+            padding: 0;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .logo h1 {
+            color: #4F46E5;
+            font-size: 28px;
+            font-weight: 800;
+            margin: 0;
+            letter-spacing: -0.5px;
+        }
+
+        .card {
+            background-color: #ffffff;
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            border-top: 6px solid #4F46E5;
+        }
+
+        .icon {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            color: #111827;
+            font-size: 24px;
+            margin-top: 0;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        p {
+            color: #4B5563;
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .update-box {
+            background-color: #F9FAFB;
+            border: 1px solid #E5E7EB;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 25px 0;
+        }
+
+        .section-header {
+            color: #374151;
+            font-size: 16px;
+            font-weight: 700;
+            margin-top: 15px;
+            margin-bottom: 10px;
+            border-bottom: 2px solid #E5E7EB;
+            padding-bottom: 5px;
+        }
+
+        ul {
+            margin: 0;
+            padding-left: 20px;
+            color: #4B5563;
+        }
+
+        li {
+            margin-bottom: 8px;
+            font-size: 15px;
+            font-weight: 500;
+        }
+
+        .cta-button {
+            display: block;
+            background-color: #4F46E5;
+            color: #ffffff !important;
+            text-decoration: none;
+            padding: 14px 30px;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 16px;
+            text-align: center;
+            margin: 30px auto 0 auto;
+            max-width: 200px;
+            box-shadow: 0 4px 6px -1px rgba(79, 70, 229, 0.2);
+        }
+
+        .cta-button:hover {
+            background-color: #4338CA;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            color: #9CA3AF;
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="logo">
+            <img src="https://aipharmaguru.web.app/assets/PharmaAIGuru.png" alt="aiCure Academy" style="height: 60px; max-width: 100%; object-fit: contain;" />
+        </div>
+        <div class="card">
+            <div class="icon">
+                <span style="font-size: 48px;">📚</span>
+            </div>
+            <h2>New Course Material Added</h2>
+            <p>Hi {{studentName}},</p>
+            <p>New learning activities have been added to your enrolled course: <strong>{{courseTitle}}</strong>. Check out the latest updates below and keep up the great learning progress!</p>
+
+            <div class="update-box">
+                <div style="{{quizSectionStyle}}">
+                    <div class="section-header">🧠 New Quizzes Added</div>
+                    <ul>
+                        {{quizList}}
+                    </ul>
+                </div>
+
+                <div style="{{assignmentSectionStyle}}">
+                    <div class="section-header" style="margin-top: 25px;">📝 New Assignments Added</div>
+                    <ul>
+                        {{assignmentList}}
+                    </ul>
+                </div>
+            </div>
+
+            <a href="{{courseUrl}}" class="cta-button">Go to Course</a>
+        </div>
+        <div class="footer">
+            <p>&copy; 2026 aiCure Academy. All rights reserved.</p>
+        </div>
+    </div>
+</body>
+
+</html>

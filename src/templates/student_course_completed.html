@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Congratulations on Completing Your Course!</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background-color: #F3F4F6;
+            margin: 0;
+            padding: 0;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .logo h1 {
+            color: #4F46E5;
+            font-size: 28px;
+            font-weight: 800;
+            margin: 0;
+            letter-spacing: -0.5px;
+        }
+
+        .card {
+            background-color: #ffffff;
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            border-top: 6px solid #F59E0B; /* Gold ribbon color */
+            position: relative;
+            overflow: hidden;
+        }
+
+        .badge-ribbon {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: #F59E0B;
+            color: white;
+            padding: 5px 15px;
+            font-size: 12px;
+            font-weight: bold;
+            border-bottom-left-radius: 8px;
+            text-transform: uppercase;
+        }
+
+        .icon {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            color: #111827;
+            font-size: 26px;
+            margin-top: 0;
+            margin-bottom: 10px;
+            text-align: center;
+            font-weight: 800;
+        }
+
+        p {
+            color: #4B5563;
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .cert-box {
+            background-color: #FAF5FF;
+            border: 2px solid #E9D5FF;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 30px 0;
+            text-align: center;
+        }
+
+        .cert-title {
+            color: #581C87;
+            font-size: 18px;
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+
+        .cert-id {
+            color: #6B7280;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 14px;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: #F59E0B;
+            color: #ffffff !important;
+            text-decoration: none;
+            padding: 14px 35px;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 16px;
+            text-align: center;
+            box-shadow: 0 4px 6px -1px rgba(245, 158, 11, 0.2);
+            transition: background-color 0.2s;
+        }
+
+        .cta-button:hover {
+            background-color: #D97706;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            color: #9CA3AF;
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="logo">
+            <img src="https://aipharmaguru.web.app/assets/PharmaAIGuru.png" alt="aiCure Academy" style="height: 60px; max-width: 100%; object-fit: contain;" />
+        </div>
+        <div class="card">
+            <div class="badge-ribbon">Certified</div>
+            <div class="icon">
+                <span style="font-size: 64px;">🎓</span>
+            </div>
+            <h2>Congratulations, {{studentName}}!</h2>
+            <p>We are absolutely thrilled to celebrate your completion of <strong>{{courseTitle}}</strong>.</p>
+            <p>Your hard work, dedication, and clinical focus have successfully earned you an official certificate of completion. You can download, share, or verify your credential at any time using the link below.</p>
+
+            <div class="cert-box">
+                <div class="cert-title">Verified Achievement Certificate</div>
+                <div class="cert-id">Credential ID: {{certificateId}}</div>
+                <a href="{{certificateUrl}}" class="cta-button" target="_blank">View Certificate</a>
+            </div>
+
+            <p style="font-size: 14px; color: #6B7280; text-align: center; margin-top: 20px;">
+                Secured and verified by aiCure Academy Verification Services.
+            </p>
+        </div>
+        <div class="footer">
+            <p>&copy; 2026 aiCure Academy. All rights reserved.</p>
+        </div>
+    </div>
+</body>
+
+</html>

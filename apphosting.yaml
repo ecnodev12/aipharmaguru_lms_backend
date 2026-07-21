@@ -1,0 +1,28 @@
+# Settings for Backend (on Cloud Run).
+runConfig:
+  cpu: 1
+  memoryMiB: 512
+  minInstances: 0
+  maxInstances: 10
+  concurrency: 80
+
+# Environment variables and secrets.
+env:
+  - variable: NODE_ENV
+    value: "production"
+  - variable: PORT
+    value: "8080"
+  - variable: RAZORPAY_KEY_ID
+    secret: RAZORPAY_KEY_ID
+  - variable: RAZORPAY_KEY_SECRET
+    secret: RAZORPAY_KEY_SECRET
+  - variable: EMAIL_USER
+    secret: EMAIL_USER
+  - variable: EMAIL_PASS
+    secret: EMAIL_PASS
+  - variable: EMAIL_SERVICE
+    secret: EMAIL_SERVICE
+  - variable: GROQ_API_KEY
+    secret: GROQ_API_KEY
+  - variable: GROQ_MODEL
+    value: "openai/gpt-oss-120b"
