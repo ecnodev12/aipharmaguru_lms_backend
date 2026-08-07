@@ -24,5 +24,7 @@ env:
     secret: EMAIL_SERVICE
   - variable: GROQ_API_KEY
     secret: GROQ_API_KEY
+  - variable: FIREBASE_DATABASE_URL
+    value: "https://aicureacademy-4c3a9.firebasestorage.app"
   - variable: GROQ_MODEL
     value: "openai/gpt-oss-120b"

@@ -50,7 +50,7 @@ try {
 }
 
 const backendId = 'aicurelmsbackend';
-const projectId = 'aipharmaguru-4c3a9';
+const projectId = 'aicureacademy-4c3a9';
 
 console.log(`Starting secret updates for backend: ${backendId} (project: ${projectId})...\n`);
 

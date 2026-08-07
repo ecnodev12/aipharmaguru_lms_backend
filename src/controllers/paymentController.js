@@ -61,7 +61,9 @@ const createOrder = async (req, res) => {
         }
       }
 
-      price += Number(courseData.price || courseData.suggestedPrice || 0);
+      const isCourseFree = courseData.isFree === true || courseData.isFree === 'true';
+      const coursePrice = isCourseFree ? 0 : Number(courseData.price || courseData.suggestedPrice || 0);
+      price += coursePrice;
     }
 
     // 2. Apply Coupon (if provided)
@@ -512,6 +514,16 @@ const verifyOwnership = async (req, res) => {
     // Check if course is in user's enrolledCourses list
     if (!userData.enrolledCourses || !userData.enrolledCourses.includes(courseId)) {
       return res.status(403).json({ valid: false, message: 'User is not enrolled in this course' });
+    }
+
+    // Check if course is free
+    const courseRef = db.collection('courses').doc(courseId);
+    const courseDoc = await courseRef.get();
+    if (courseDoc.exists) {
+      const courseData = courseDoc.data();
+      if (courseData.isFree === true || courseData.isFree === 'true' || Number(courseData.price || courseData.suggestedPrice || 0) === 0) {
+        return res.status(200).json({ valid: true, message: 'Free course access granted' });
+      }
     }
 
     // 1. Verify payment transactions in Firestore
