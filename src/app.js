@@ -33,6 +33,7 @@ const allowedOrigins = [
   "http://localhost:5173",
   "https://aipharmaguru-4c3a9.web.app",
   "https://aipharmaguru-4c3a9.firebaseapp.com",
+  "https://aipharmaguru--aipharmaguru.asia-southeast1.hosted.app",
   "https://aicurelmsbackend--aipharmaguru-4c3a9.asia-southeast1.hosted.app"
 ];
 

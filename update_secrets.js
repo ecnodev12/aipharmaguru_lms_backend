@@ -49,8 +49,8 @@ try {
   process.exit(1);
 }
 
-const backendId = 'aicurelmsbackend';
-const projectId = 'aicureacademy-4c3a9';
+const backendId = 'aipharmaguru';
+const projectId = 'aipharmaguru';
 
 console.log(`Starting secret updates for backend: ${backendId} (project: ${projectId})...\n`);
 
