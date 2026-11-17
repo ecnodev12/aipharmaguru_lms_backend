@@ -4,6 +4,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "node -e 'console.log(\"Build step completed\")'",
     "start": "NODE_ENV=production node index.js",
     "dev": "NODE_ENV=development nodemon index.js"
   },

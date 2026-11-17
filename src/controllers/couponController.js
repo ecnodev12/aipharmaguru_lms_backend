@@ -63,8 +63,8 @@ const validateCoupon = async (req, res) => {
       return res.status(200).json({ valid: false, message: 'Coupon code is required' });
     }
 
-    // Force uppercase for consistent lookup
-    const searchCode = code.toUpperCase();
+    // Force uppercase and trimmed for consistent lookup
+    const searchCode = code.trim().toUpperCase();
     const couponRef = db.collection('coupons').doc(searchCode);
     const doc = await couponRef.get();
 
@@ -79,10 +79,15 @@ const validateCoupon = async (req, res) => {
       return res.status(400).json({ valid: false, message: 'Coupon is inactive' });
     }
 
-    // Check expiry (if set)
+    // Check expiry safely (handles Firestore Timestamp, Date object, or ISO string)
     const now = new Date();
-    if (coupon.expiryDate && now > coupon.expiryDate.toDate()) {
+    if (coupon.expiryDate) {
+      const expiry = coupon.expiryDate?.toDate 
+        ? coupon.expiryDate.toDate() 
+        : new Date(coupon.expiryDate);
+      if (!isNaN(expiry.getTime()) && now > expiry) {
         return res.status(400).json({ valid: false, message: 'Coupon has expired' });
+      }
     }
 
     // Check usage limits (if set)
@@ -96,7 +101,9 @@ const validateCoupon = async (req, res) => {
         return res.status(200).json({ valid: false, message: 'This coupon is not valid for this course' });
       }
 
-      const courseIds = courseId.split(',');
+      const courseIds = (typeof courseId === 'string' ? courseId.split(',') : (Array.isArray(courseId) ? courseId : [courseId]))
+        .map(id => String(id).trim())
+        .filter(Boolean);
       const isCourseAllowed = courseIds.some(id => coupon.allowedCourses.includes(id));
       if (!isCourseAllowed) {
         return res.status(200).json({ valid: false, message: 'This coupon is not valid for this course' });

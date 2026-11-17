@@ -221,7 +221,10 @@ const createOrder = async (req, res) => {
 
         console.log(`Applying coupon: ${normalizedCoupon}, Type: ${coupon.type}, Value: ${coupon.value}`);
 
-        const isExpired = coupon.expiryDate && now > coupon.expiryDate.toDate();
+        const expiry = coupon.expiryDate?.toDate 
+          ? coupon.expiryDate.toDate() 
+          : (coupon.expiryDate ? new Date(coupon.expiryDate) : null);
+        const isExpired = expiry && !isNaN(expiry.getTime()) && now > expiry;
         const isLimitReached = coupon.maxUses && coupon.usedCount >= coupon.maxUses;
 
         if (coupon.allowedCourses && Array.isArray(coupon.allowedCourses) && coupon.allowedCourses.length > 0) {
@@ -455,6 +458,14 @@ const verifyPayment = async (req, res) => {
     );
 
     if (!isSignatureValid) {
+      if (razorpay_order_id) {
+        await db.collection('transactions').doc(razorpay_order_id).update({
+          status: 'failed',
+          failureReason: 'Invalid payment signature',
+          paymentId: razorpay_payment_id,
+          failedAt: admin.firestore.FieldValue.serverTimestamp()
+        }).catch(() => {});
+      }
       return res.status(400).json({ error: 'Invalid signature' });
     }
 
@@ -462,6 +473,14 @@ const verifyPayment = async (req, res) => {
     const payment = await paymentService.fetchPayment(razorpay_payment_id);
 
     if (payment.status !== 'captured') {
+      if (razorpay_order_id) {
+        await db.collection('transactions').doc(razorpay_order_id).update({
+          status: 'failed',
+          failureReason: `Payment status is ${payment.status} (not captured)`,
+          paymentId: razorpay_payment_id,
+          failedAt: admin.firestore.FieldValue.serverTimestamp()
+        }).catch(() => {});
+      }
       return res.status(400).json({ error: 'Payment not captured' });
     }
     
@@ -1003,6 +1022,75 @@ const verifyOwnership = async (req, res) => {
   }
 };
 
+/**
+ * Record Payment Failure or Cancellation
+ * POST /api/payment/failure
+ */
+const recordPaymentFailure = async (req, res) => {
+  try {
+    const { orderId, paymentId, reason, courseId } = req.body;
+    const userId = req.user.uid;
+    const userEmail = (req.user.email || '').toLowerCase().trim();
+    const userName = req.user.name || 'Student';
+
+    if (!orderId && !paymentId) {
+      return res.status(400).json({ error: 'orderId or paymentId is required' });
+    }
+
+    const targetId = orderId || paymentId;
+    const transRef = db.collection('transactions').doc(targetId);
+    const transSnap = await transRef.get();
+
+    const failurePayload = {
+      status: 'failed',
+      failureReason: reason || 'Payment failed or was cancelled',
+      paymentId: paymentId || null,
+      failedAt: admin.firestore.FieldValue.serverTimestamp()
+    };
+
+    let orderAmount = 0;
+    let targetCourseId = courseId || null;
+
+    if (transSnap.exists) {
+      const tData = transSnap.data();
+      orderAmount = tData.amount || 0;
+      targetCourseId = tData.courseId || targetCourseId;
+      await transRef.update(failurePayload);
+    } else {
+      await transRef.set({
+        userId,
+        orderId: orderId || targetId,
+        paymentId: paymentId || null,
+        courseId: targetCourseId,
+        currency: 'INR',
+        status: 'failed',
+        failureReason: reason || 'Payment failed or was cancelled',
+        createdAt: admin.firestore.FieldValue.serverTimestamp(),
+        failedAt: admin.firestore.FieldValue.serverTimestamp()
+      }, { merge: true });
+    }
+
+    // Send failure notification email if email is available
+    if (userEmail) {
+      try {
+        const emailService = require('../services/emailService');
+        await emailService.sendEmail(userEmail, 'Payment Failed', 'payment_failed', {
+          name: userName,
+          reason: reason || 'Transaction could not be processed',
+          amount: orderAmount ? `₹${orderAmount}` : 'the course fee'
+        });
+      } catch (emailErr) {
+        console.warn('Payment failed notification email warning:', emailErr.message);
+      }
+    }
+
+    res.status(200).json({ status: 'success', message: 'Payment failure recorded' });
+  } catch (error) {
+    console.error('Error in recordPaymentFailure:', error);
+    res.status(500).json({ error: error.message });
+  }
+};
+
 module.exports = {
   createOrder,
   verifyPayment,
@@ -1010,5 +1098,6 @@ module.exports = {
   debugKeys,
   verifyOwnership,
   checkIsCourseFree,
-  checkUserFreeGrant
+  checkUserFreeGrant,
+  recordPaymentFailure
 };

@@ -72,3 +72,13 @@ node_modules/
 .env.production
 .env.backup
 src/config/serviceAccountKey.json
+
+# Deployment packages
+dist-deploy/
+*.zip
+*.tgz
+
+# Deployment packages
+dist-deploy/
+*.zip
+*.tgz

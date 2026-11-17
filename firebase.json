@@ -1,0 +1,16 @@
+{
+  "apphosting": {
+    "backendId": "aipharmaguru",
+    "rootDir": "/",
+    "ignore": [
+      "node_modules",
+      ".git",
+      "firebase-debug.log",
+      "firebase-debug.*.log",
+      ".env.development",
+      ".env.backup",
+      "dist-deploy",
+      "src/config/serviceAccountKey.json"
+    ]
+  }
+}

@@ -1,5 +1,7 @@
 {
   "projects": {
-    "default": "aicureacademy-4c3a9"
+    "default": "aipharmaguru",
+    "production": "aipharmaguru",
+    "legacy": "aicureacademy-4c3a9"
   }
 }
